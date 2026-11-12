@@ -57,8 +57,7 @@ defmodule AshJsonApi.Resource.Info do
 
     domain_or_domains
     |> List.wrap()
-    |> Enum.flat_map(&AshJsonApi.Domain.Info.routes/1)
-    |> Enum.filter(&(&1.resource == module))
+    |> Enum.flat_map(&AshJsonApi.Domain.Info.routes_for_resource(&1, module))
     |> Enum.concat(Extension.get_entities(resource, [:json_api, :routes]))
   end
 
