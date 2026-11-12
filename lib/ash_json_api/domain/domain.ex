@@ -207,7 +207,10 @@ defmodule AshJsonApi.Domain do
     AshJsonApi.Domain.Verifiers.VerifyQueryParams
   ]
 
-  @persisters [AshJsonApi.Domain.Persisters.DefineRouter]
+  @persisters [
+    AshJsonApi.Domain.Persisters.DefineRouter,
+    AshJsonApi.Domain.Persisters.IndexRoutesByResource
+  ]
   @transformers [AshJsonApi.Domain.Transformers.SetBaseRoutes]
 
   @sections [@json_api]

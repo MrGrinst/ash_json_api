@@ -808,9 +808,8 @@ defmodule AshJsonApi.Resource do
   def route(resource, domains, criteria \\ %{}) do
     resource
     |> routes(domains)
-    |> Enum.filter(&route_visible?(resource, &1))
     |> Enum.find(fn route ->
-      Map.take(route, Map.keys(criteria)) == criteria
+      Map.take(route, Map.keys(criteria)) == criteria and route_visible?(resource, route)
     end)
   end
 

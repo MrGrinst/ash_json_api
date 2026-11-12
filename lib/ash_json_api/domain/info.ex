@@ -30,6 +30,14 @@ defmodule AshJsonApi.Domain.Info do
     Extension.get_entities(domain, [:json_api, :routes])
   end
 
+  @doc false
+  def routes_for_resource(domain, resource) do
+    case Extension.get_persisted(domain, :ash_json_api_routes_by_resource) do
+      nil -> domain |> routes() |> Enum.filter(&(&1.resource == resource))
+      routes_by_resource -> Map.get(routes_by_resource, resource, [])
+    end
+  end
+
   def authorize?(domain) do
     Extension.get_opt(domain, [:json_api], :authorize?, true, true)
   end
